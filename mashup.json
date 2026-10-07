@@ -1,0 +1,358 @@
+{
+  "id": "sigf/valcraft-strangemap",
+  "version": "0.1.0",
+  "name": "ValCraft (strangemap)",
+  "tagline": "Real Minecraft drawn inside Valheim: build blocks the trolls bump into and fight with Minecraft swords, bows and TNT.",
+  "how_to_play": [
+    "Explore Valheim's world as a Minecraft player: place and break blocks that creatures collide with, and fight with Minecraft weapons, TNT and ender pearls.",
+    "Press Play: Minecraft starts hidden first, then Valheim. Load a world; Steve appears once Minecraft has linked up.",
+    "R switches between Minecraft mode and Valheim's own weapons and body. Left click attacks or breaks, right click uses or places, E opens the inventory.",
+    "1-9 or the wheel pick from the hotbar, Ctrl sprints, Shift sneaks, Space twice flies in creative, F3+F4 changes the game mode.",
+    "F6 hands, F7 ValCraft on or off, F8 re-levels the grid to where you stand, F9 creative or survival. In survival, dying in Minecraft kills the Viking."
+  ],
+  "kind": "passthrough",
+  "games": [
+    {
+      "game": "valheim",
+      "role": "host",
+      "label": "Valheim",
+      "engine": "Valheim (Unity 6, Mono, DirectX 11) + BepInEx 5 plugin ValCraft (C#) + ReShade add-on ValCraft.addon64 (C++)",
+      "apps": {
+        "steam": "892970"
+      },
+      "runtime": "Unity 6000.0.75 build of the author (2026-10-05); no version check; DirectX 11 only (-force-d3d11)"
+    },
+    {
+      "game": "minecraft",
+      "role": "guest",
+      "label": "Minecraft",
+      "engine": "Minecraft Java 26.3 + Fabric mod passthrough (universal-modder's, with ValCraft's changes)",
+      "mc": "26.3",
+      "loader": "fabric@0.19.5",
+      "java": "25"
+    }
+  ],
+  "requires": [
+    {
+      "id": "bepinexpack-valheim",
+      "version": "5.4.2350",
+      "license": "LGPL-2.1 (BepInEx 5.4.23.5) + MIT (Valheim changes, Harmony, MonoMod, Mono.Cecil), shipped unchanged",
+      "page": "https://thunderstore.io/c/valheim/p/denikson/BepInExPack_Valheim/",
+      "note": "the Valheim build of BepInEx; installed into the game folder by the app",
+      "source": {
+        "url": "https://github.com/SIGFAI/valcraft-strangemap/releases/download/v0.1.0/denikson-BepInExPack_Valheim-5.4.2350.zip",
+        "sha256": "37a91c000b4e88f2ed7a4bd7d812239852d2e36cbf0ff0a9f5faacfba46b105f"
+      }
+    },
+    {
+      "id": "reshade",
+      "version": "6.8.0",
+      "license": "BSD-3-Clause, ReShade64.dll shipped unchanged as dxgi.dll",
+      "page": "https://reshade.me/",
+      "note": "the add-on build of ReShade composites Minecraft into Valheim; installed into the game folder by the app"
+    },
+    {
+      "id": "fabric-loader",
+      "version": "0.19.5"
+    },
+    {
+      "id": "fabric-api",
+      "version": "0.161.0+26.3",
+      "note": "in the Minecraft pack (downloaded from Modrinth)"
+    }
+  ],
+  "install": [
+    {
+      "game": "valheim",
+      "strategy": "game-dir-snapshot",
+      "loader": "bepinex",
+      "files": [
+        {
+          "src": "denikson-BepInExPack_Valheim-5.4.2350.zip",
+          "dst": "{game}",
+          "root": "BepInExPack_Valheim",
+          "unpack": true,
+          "contents": [
+            {
+              "path": "BepInExPack_Valheim/.doorstop_version",
+              "sha256": "84fa42545c0993edf8a5559d2a0772260f85f4a7ed29ec75e6590be64ed98067"
+            },
+            {
+              "path": "BepInExPack_Valheim/BepInEx/config/BepInEx.cfg",
+              "sha256": "3d460196bb8f993fc71048efc6d1bbc21b5364eefac778df61955138c83cc677"
+            },
+            {
+              "path": "BepInExPack_Valheim/BepInEx/core/0Harmony.dll",
+              "sha256": "1a21cc03424fc82c3dd1346905d16494536b9595ae4162228d99fb7c285c1031"
+            },
+            {
+              "path": "BepInExPack_Valheim/BepInEx/core/0Harmony.xml",
+              "sha256": "d1f02fc3ada3a13da307de421225bfe56ebe24064370980979391c4be021672f"
+            },
+            {
+              "path": "BepInExPack_Valheim/BepInEx/core/0Harmony20.dll",
+              "sha256": "5708451a91eaecee71a49b1881fb081ee22142e11de04e8575f4f6832fa16d0e"
+            },
+            {
+              "path": "BepInExPack_Valheim/BepInEx/core/BepInEx.dll",
+              "sha256": "f09821b2a7b990c6f50c5ef23229635303ce675374b70edc6f5a9b960cb818e3"
+            },
+            {
+              "path": "BepInExPack_Valheim/BepInEx/core/BepInEx.Harmony.dll",
+              "sha256": "2f0270073e307095ce980f578bfc9489f7ac98d360b9d41f77370a84c33edd7a"
+            },
+            {
+              "path": "BepInExPack_Valheim/BepInEx/core/BepInEx.Harmony.xml",
+              "sha256": "a04fedf08f7c81f5d01aba6f2840a7ffce50b79bbd24587d8dbe69ab73971d29"
+            },
+            {
+              "path": "BepInExPack_Valheim/BepInEx/core/BepInEx.Preloader.dll",
+              "sha256": "fb21bf85c462bc5376435eccfed23f07a36baa94f770ff35cd567e17d2997c8d"
+            },
+            {
+              "path": "BepInExPack_Valheim/BepInEx/core/BepInEx.Preloader.xml",
+              "sha256": "ab433415cb8f006f683c0c193d140b92f0244568e6e443d53a5c4c18a632dc98"
+            },
+            {
+              "path": "BepInExPack_Valheim/BepInEx/core/BepInEx.xml",
+              "sha256": "65b9d6e40c8645e04cf1cf6342c2812f52766f2d0fc1b5736b03f17fb23df11e"
+            },
+            {
+              "path": "BepInExPack_Valheim/BepInEx/core/HarmonyXInterop.dll",
+              "sha256": "dac1b52655f03ba00773eb63894bfd0da4d4df6d47041a64cfd4b1da757371ba"
+            },
+            {
+              "path": "BepInExPack_Valheim/BepInEx/core/Mono.Cecil.dll",
+              "sha256": "7ae470288fff4a402899c254d0a76cefef55877f5c54f96e83c797cc5bb6e2f6"
+            },
+            {
+              "path": "BepInExPack_Valheim/BepInEx/core/Mono.Cecil.Mdb.dll",
+              "sha256": "5896d1898f616701fff18f3b2c71e6b844d2390ef9f41e1c5fccce8cb27c698e"
+            },
+            {
+              "path": "BepInExPack_Valheim/BepInEx/core/Mono.Cecil.Pdb.dll",
+              "sha256": "174db44a067f58561510af746f3caeb032037762c57a31c8d9ee32db25174984"
+            },
+            {
+              "path": "BepInExPack_Valheim/BepInEx/core/Mono.Cecil.Rocks.dll",
+              "sha256": "54ac539fb5ddc8b44c0e9acd0fcb7324f89d1a072edf8ebc1b06dd691e3d3927"
+            },
+            {
+              "path": "BepInExPack_Valheim/BepInEx/core/MonoMod.RuntimeDetour.dll",
+              "sha256": "40e49bb314391cd7bddc2644f8553eeba92c194b940836b103df16955c464e0c"
+            },
+            {
+              "path": "BepInExPack_Valheim/BepInEx/core/MonoMod.RuntimeDetour.xml",
+              "sha256": "54887808960d156550b37d602d08847607aa9e908d039f2765fb0b5e79394aa4"
+            },
+            {
+              "path": "BepInExPack_Valheim/BepInEx/core/MonoMod.Utils.dll",
+              "sha256": "9d1495f147ac93c4f81f84538c1a326e8f8a6aefc78d6289d798f3ce1162c5e9"
+            },
+            {
+              "path": "BepInExPack_Valheim/BepInEx/core/MonoMod.Utils.xml",
+              "sha256": "0577b362023a3432d6e8d7934c5eddc3e08fdbb19e191af083e341562c5ede38"
+            },
+            {
+              "path": "BepInExPack_Valheim/changelog.txt",
+              "sha256": "d75b7488bc666df9254667226a58f100392058520f3eafdb1368e49e42057530"
+            },
+            {
+              "path": "BepInExPack_Valheim/doorstop_config.ini",
+              "sha256": "4d5c6dfa0f771c6a5b1b0c559aca0bd0ece7d08b08fff894708dc3b73ce73cfc"
+            },
+            {
+              "path": "BepInExPack_Valheim/doorstop_libs/libdoorstop_x64.dylib",
+              "sha256": "fb8e066b0de1e74341eeeb768157514df51a531311f2fcbc334168bb2a85bb1a"
+            },
+            {
+              "path": "BepInExPack_Valheim/doorstop_libs/libdoorstop_x64.so",
+              "sha256": "f1948c4f21bd92fa9fffb1ebe39d6e1db926674a5d1b2e1879b2ccd50443f8d4"
+            },
+            {
+              "path": "BepInExPack_Valheim/start_game_bepinex.sh",
+              "sha256": "8e2159eaf2f8f44f6861af4b6fb5a852d72865e8bbafc700da99dd1084cdc323"
+            },
+            {
+              "path": "BepInExPack_Valheim/start_server_bepinex.sh",
+              "sha256": "ce627a9c2865a992bdf95d20f42636d0784c07afe39f49068d78b22103cdbe18"
+            },
+            {
+              "path": "BepInExPack_Valheim/winhttp.dll",
+              "sha256": "93406d0a02e7c164b89828cbfe3b289930a112d2eca50bd4a52e72ece169e6a8"
+            },
+            {
+              "path": "CHANGELOG.md",
+              "sha256": "931149ae0ac67a443f6f6081e499357fb8a0166b1879daea0c9769f515bc3738"
+            },
+            {
+              "path": "icon.png",
+              "sha256": "d674921f6262ccfb403c414f31f1e147110da04446674cc985fe4e5cff1b14d6"
+            },
+            {
+              "path": "manifest.json",
+              "sha256": "47007fbb75fe07d6676c11043563516b23f0ea78b23de3b1dc8ec4900273e38f"
+            },
+            {
+              "path": "README.md",
+              "sha256": "0ff0b0d60ffc54defd6485e3a5444a48be8f101d4876153a88ba509e2f1fedb6"
+            }
+          ],
+          "url": "https://github.com/SIGFAI/valcraft-strangemap/releases/download/v0.1.0/denikson-BepInExPack_Valheim-5.4.2350.zip",
+          "sha256": "37a91c000b4e88f2ed7a4bd7d812239852d2e36cbf0ff0a9f5faacfba46b105f",
+          "size": 706129
+        },
+        {
+          "src": "valcraft-strangemap-valheim.zip",
+          "dst": "{game}",
+          "unpack": true,
+          "contents": [
+            {
+              "path": "BepInEx/plugins/ValCraft.dll",
+              "sha256": "80912360555093c5451452deeedf04228aa32d38f901a09b56ad33c5d8047b9e"
+            },
+            {
+              "path": "dxgi.dll",
+              "sha256": "0cee63f9c9f13f3ac909c5b4903f4dbb4b719a7ab3b4f13b0deaf83c814b94f7"
+            },
+            {
+              "path": "reshade-shaders/LICENSE-ReShade.md",
+              "sha256": "237ded5b8344f820113efab1e65e91e1f159d9202c5b4856606a0590d3ffdab0"
+            },
+            {
+              "path": "reshade-shaders/Shaders/MCPassthrough.fx",
+              "sha256": "c68e178c7fc3dbe5d4e10f0172fed14d0ea8ff3f9cce92a1b785f7373ea9d983"
+            },
+            {
+              "path": "reshade-shaders/Shaders/ReShade.fxh",
+              "sha256": "6dabfbbaf968c3871905d2ea17f96572ff7b1cec01310b5d0e5252b66b30174f"
+            },
+            {
+              "path": "reshade-shaders/Shaders/ReShadeUI.fxh",
+              "sha256": "78adf672df47460297eb9fe6dd238d2aafa24510b52b84feb1a745dff70eb901"
+            },
+            {
+              "path": "ReShade.ini",
+              "sha256": "7b9dc94b03308293cd3ab8e3e06aa241de3a2e12e0bfe519b1fb6db876e4b307"
+            },
+            {
+              "path": "ReShadePreset.ini",
+              "sha256": "5eef6bfad216f3d0e92df08ac4137944d8db8fac4228ee955bf66518cb3f85c1"
+            },
+            {
+              "path": "ValCraft-LICENSE.txt",
+              "sha256": "fa710cd0fe4d45db1b37ba2ac7c17e242fb24c14b1466f541c6cd9d8fc69b139"
+            },
+            {
+              "path": "ValCraft.addon64",
+              "sha256": "a3fa8a9a9d1a94aa2e31e2ba20c9599d1d37934c6c01696266a7f0e121f37699"
+            }
+          ],
+          "url": "https://github.com/SIGFAI/valcraft-strangemap/releases/download/v0.1.0/valcraft-strangemap-valheim.zip",
+          "sha256": "96de380cb7369fffa6a64d294d8ccb996aab43d1ba2c875637985e7a9005bdf1",
+          "size": 2594056
+        }
+      ]
+    },
+    {
+      "game": "minecraft",
+      "strategy": "mrpack",
+      "jvm_args": [
+        "-Dpassthrough.startHidden=true"
+      ],
+      "pack": {
+        "src": "valcraft-strangemap.mrpack",
+        "url": "https://github.com/SIGFAI/valcraft-strangemap/releases/download/v0.1.0/valcraft-strangemap.mrpack",
+        "sha256": "199291ae1dac8a627aab11daeb95738cee2220692f35749382c7fc190d5b8c8d",
+        "size": 214402
+      }
+    }
+  ],
+  "launch": [
+    {
+      "game": "minecraft",
+      "wait": "port:25599"
+    },
+    {
+      "game": "valheim",
+      "args": [
+        "-force-d3d11"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "name": "denikson-BepInExPack_Valheim-5.4.2350.zip",
+      "url": "https://github.com/SIGFAI/valcraft-strangemap/releases/download/v0.1.0/denikson-BepInExPack_Valheim-5.4.2350.zip",
+      "sha256": "37a91c000b4e88f2ed7a4bd7d812239852d2e36cbf0ff0a9f5faacfba46b105f",
+      "size": 706129
+    },
+    {
+      "name": "valcraft-strangemap-valheim.zip",
+      "url": "https://github.com/SIGFAI/valcraft-strangemap/releases/download/v0.1.0/valcraft-strangemap-valheim.zip",
+      "sha256": "96de380cb7369fffa6a64d294d8ccb996aab43d1ba2c875637985e7a9005bdf1",
+      "size": 2594056
+    },
+    {
+      "name": "valcraft-strangemap.mrpack",
+      "url": "https://github.com/SIGFAI/valcraft-strangemap/releases/download/v0.1.0/valcraft-strangemap.mrpack",
+      "sha256": "199291ae1dac8a627aab11daeb95738cee2220692f35749382c7fc190d5b8c8d",
+      "size": 214402
+    }
+  ],
+  "source": {
+    "repo": "https://github.com/strangemap/valcraft",
+    "license": "MIT AND LGPL-2.1 AND BSD-3-Clause",
+    "upstream_license": "MIT",
+    "tag": "v0.1.0",
+    "commit": "0dc1cd2484b1036b213a7e37bef1297f6b16ae74",
+    "hosted": "https://github.com/SIGFAI/valcraft-strangemap",
+    "based_on": "https://github.com/rehan-remade/universal-modder",
+    "bundled": [
+      {
+        "name": "BepInExPack_Valheim",
+        "version": "5.4.2350",
+        "repo": "https://github.com/AzumattDev/BepInEx",
+        "commit": "ef506e0a6bb98c49d85b7927b5ab625605826be0",
+        "license": "LGPL-2.1 (BepInEx 5.4.23.5) + MIT (Valheim changes, Harmony, MonoMod, Mono.Cecil)"
+      },
+      {
+        "name": "ReShade",
+        "version": "6.8.0",
+        "repo": "https://github.com/crosire/reshade",
+        "commit": "18deaa52de0c425a78b329e9cb3c497281cd00ec",
+        "license": "BSD-3-Clause"
+      },
+      {
+        "name": "reshade-shaders (ReShade.fxh, ReShadeUI.fxh)",
+        "repo": "https://github.com/crosire/reshade-shaders",
+        "commit": "fd0022170615ce0d8162d219bff07232fa6dd84f",
+        "license": "CC0-1.0"
+      }
+    ]
+  },
+  "media": {
+    "cover": "https://raw.githubusercontent.com/strangemap/valcraft/70d3389fac5d67b7001a156fc3623b622aa7c0fb/docs/img/meadow.jpg"
+  },
+  "built_by": {
+    "author": "strangemap",
+    "authors": [
+      "strangemap",
+      "Rehan and universal-modder contributors"
+    ],
+    "packaged_by": "SIGF"
+  },
+  "idea_by": "strangemap",
+  "built_at": "2026-10-07T00:00:00.000Z",
+  "conflicts": [
+    "sigf/valcraft"
+  ],
+  "status": "beta",
+  "issues": "https://github.com/strangemap/valcraft/issues",
+  "notes": [
+    "You need Valheim on Steam and Minecraft: Java Edition (Windows), a GPU that runs Valheim on DirectX 11, and a few GB of free RAM: both games run at once. The app starts Valheim with -force-d3d11.",
+    "Experimental, single player (or your own Minecraft server). Not the same mod as LoAlCo's ValCraft: install only one of the two, restore the other first.",
+    "BepInExPack_Valheim, ReShade 6.8.0 (as dxgi.dll) and ValCraft are installed into the Valheim folder for you; Restore removes them. Settings: BepInEx\\config\\valcraft.passthrough.cfg.",
+    "No Minecraft at all: check Valheim\\ReShade.log for \"Registered add-on ValCraft\" and BepInEx\\LogOutput.log for \"connected to Minecraft\". Beta: report bugs to the author on the upstream issue tracker."
+  ]
+}
