@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "passthrough",
+	"version": "${version}",
+	"name": "ValCraft",
+	"description": "Minecraft inside Valheim: runs alongside Valheim (ValCraft BepInEx plugin), takes its camera, turns its ground into barriers and hands Minecraft's picture back to be composited. Based on universal-modder's Minecraft x GTA V passthrough.",
+	"authors": [
+		"strange",
+		"rehan (universal-modder)"
+	],
+	"license": "MIT",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"dev.rehan.passthrough.Passthrough"
+		],
+		"client": [
+			"dev.rehan.passthrough.client.PassthroughClient"
+		]
+	},
+	"mixins": [
+		"passthrough.mixins.json",
+		{
+			"config": "passthrough.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	},
+	"contact": {
+		"sources": "https://github.com/strangemap/valcraft"
+	}
+}
